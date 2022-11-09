@@ -7,7 +7,9 @@ const STEP = 0.1;
 const MIN = 0;
 const MAX = 100;
 const COLORS = ['#1BC5BD', '#FFA800', '#E81D53'];
-const THUMB_SIZE = 42;
+const THUMB_SIZE = 35;
+const RAIL_CONTAINER_HEIGHT = 35;
+const RAIL_HEIGHT = 20;
 
 const ThumbLabel = ({
   rangeRef,
@@ -79,7 +81,7 @@ const SliderRange: React.FC<{
               onTouchStart={props.onTouchStart}
               style={{
                 ...props.style,
-                height: '36px',
+                height: RAIL_CONTAINER_HEIGHT,
                 display: 'flex',
                 width: '100%',
               }}
@@ -87,9 +89,9 @@ const SliderRange: React.FC<{
               <div
                 ref={props.ref}
                 style={{
-                  height: '20px',
+                  height: RAIL_HEIGHT,
                   width: '100%',
-                  borderRadius: '20px',
+                  borderRadius: RAIL_HEIGHT,
                   background: `linear-gradient(to right, ${
                     COLORS[0]
                   } 0%, ${ranges
@@ -125,6 +127,8 @@ const SliderRange: React.FC<{
                 justifyContent: 'center',
                 alignItems: 'center',
                 // boxShadow: '0px 2px 6px #AAA',
+                position: 'relative',
+                borderBottom: `gray ${(THUMB_SIZE - RAIL_HEIGHT) / 2}px solid`,
               }}
             >
               {isDragged ? (
@@ -134,15 +138,8 @@ const SliderRange: React.FC<{
                   index={index}
                 />
               ) : null}
-              <div
-                style={{
-                  height: '16px',
-                  width: '5px',
-                  backgroundColor: isDragged ? '#548BF4' : '#CCC',
-                }}
-              />
-              <div className='triangle-up absolute' />
-              <div className='triangle-down absolute' />
+              <div className='triangle-up absolute bottom-0' />
+              <div className='triangle-down absolute top-0' />
             </div>
           );
         }}
