@@ -52,7 +52,7 @@ function App() {
     {
       range: [33, 66],
       initial_value: 90,
-      title: "Anaylist POV",
+      title: "Analyst POV",
       icon: <FaTv />,
     },
   ];
