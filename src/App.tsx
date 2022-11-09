@@ -3,7 +3,7 @@ import SliderRange from './views/componets/range.chart/SliderRange';
 
 function App() {
   return (
-    <div>
+    <div className='app'>
       {[
         [10, 20],
         [20, 30],
