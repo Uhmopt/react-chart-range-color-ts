@@ -1,0 +1,141 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+  margin: 20px;
+  padding: 30px;
+}
+.gauges-title {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-left: 5px;
+}
+.breifcase-icon {
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border: 1px solid #615f5f;
+  border-radius: 50%;
+  margin-right: 20px;
+  color: #1bc7bf;
+}
+.sale-status {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.status {
+  padding-right: 20px;
+}
+.section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 5px;
+}
+.cyan-status::before {
+  display: inline-block;
+  content: "";
+  border: 7px #1bc7bf solid;
+  background: #1bc7bf;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+.yellow-status::before {
+  display: inline-block;
+  content: "";
+  border: 7px #fca700 solid;
+  background: #fca700;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+.red-status::before {
+  display: inline-block;
+  content: "";
+  border: 7px #ea1b54 solid;
+  background: #ea1b54;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+.cyan-section {
+  background: #1bc7bf;
+  width: 33%;
+  height: 30px;
+  border-bottom-left-radius: 25px;
+  border-top-left-radius: 25px;
+}
+.yellow-section {
+  background: #fca700;
+  width: 33%;
+  height: 30px;
+}
+.red-section {
+  background: #ea1b54;
+  width: 33%;
+  height: 30px;
+  border-bottom-right-radius: 25px;
+  border-top-right-radius: 25px;
+}
+.gauge-sliders {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: medium;
+}
+.gauge-title {
+  width: 25%;
+  padding-left: 20px;
+  display: flex;
+}
+.gauge-icon {
+  margin-right: 5px;
+}
+.gauge-wrapper {
+  width: 75%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+}
+.avg-slider {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  z-index: 1;
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+.gauge-selected {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.contrast {
+  background: #eff0ed;
+  padding: 5px;
+  border-bottom-left-radius: 30px;
+  border-top-left-radius: 30px;
+}
+.dark-contrast {
+  background: #12213b;
+  padding: 5px;
+  border-bottom-left-radius: 30px;
+  border-top-left-radius: 30px;
+}
+.dark-theme {
+  background: #0a1321;
+  color: #c4cedf;
+}
+.yellow {
+  color: #fca700;
+}
+.percent {
+  color: #1bc7bf;
+  margin-left: 10px;
+}

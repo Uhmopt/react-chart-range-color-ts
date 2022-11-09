@@ -1,15 +1,14 @@
-import * as React from 'react';
-import Range from './Range';
-import './range.chart.css';
-import { useThumbOverlap } from './range.chart.utils';
+import * as React from "react";
+import Range from "./Range";
+import "./range.chart.css";
+import { useThumbOverlap } from "./range.chart.utils";
 
 const STEP = 0.1;
 const MIN = 0;
 const MAX = 100;
-const COLORS = ['#1BC5BD', '#FFA800', '#E81D53'];
+const COLORS = ["#1BC5BD", "#FFA800", "#E81D53"];
 const THUMB_SIZE = 35;
 const RAIL_CONTAINER_HEIGHT = 35;
-const RAIL_HEIGHT = 20;
 
 const ThumbLabel = ({
   rangeRef,
@@ -26,17 +25,17 @@ const ThumbLabel = ({
     <div
       data-label={index}
       style={{
-        display: 'block',
-        position: 'absolute',
-        top: '-28px',
-        color: '#fff',
-        fontWeight: 'bold',
-        fontSize: '14px',
-        fontFamily: 'Arial,Helvetica Neue,Helvetica,sans-serif',
-        padding: '4px',
-        borderRadius: '4px',
-        backgroundColor: '#548BF4',
-        whiteSpace: 'nowrap',
+        display: "block",
+        position: "absolute",
+        top: "-28px",
+        color: "#fff",
+        fontWeight: "bold",
+        fontSize: "14px",
+        fontFamily: "Arial,Helvetica Neue,Helvetica,sans-serif",
+        padding: "4px",
+        borderRadius: "4px",
+        backgroundColor: "#548BF4",
+        whiteSpace: "nowrap",
         ...(style as React.CSSProperties),
       }}
     >
@@ -49,7 +48,15 @@ const SliderRange: React.FC<{
   rtl?: boolean;
   ranges?: number[];
   value?: number;
-}> = ({ rtl = false, ranges = [33, 66], value: propsValue = 50 }) => {
+  rail_height?: number;
+  triangle?: boolean;
+}> = ({
+  rtl = false,
+  ranges = [33, 66],
+  value: propsValue = 50,
+  rail_height = 0,
+  triangle = false,
+}) => {
   const [values, setValues] = React.useState([50]);
   const rangeRef: any = React.useRef<Range>();
 
@@ -60,9 +67,10 @@ const SliderRange: React.FC<{
   return (
     <div
       style={{
-        display: 'flex',
-        justifyContent: 'center',
-        flexWrap: 'wrap',
+        display: "flex",
+        justifyContent: "center",
+        flexWrap: "wrap",
+        width: "100%",
       }}
     >
       <Range
@@ -82,16 +90,16 @@ const SliderRange: React.FC<{
               style={{
                 ...props.style,
                 height: RAIL_CONTAINER_HEIGHT,
-                display: 'flex',
-                width: '100%',
+                display: "flex",
+                width: "100%",
               }}
             >
               <div
                 ref={props.ref}
                 style={{
-                  height: RAIL_HEIGHT,
-                  width: '100%',
-                  borderRadius: RAIL_HEIGHT,
+                  height: rail_height,
+                  width: "100%",
+                  borderRadius: rail_height,
                   background: `linear-gradient(to right, ${
                     COLORS[0]
                   } 0%, ${ranges
@@ -104,8 +112,8 @@ const SliderRange: React.FC<{
                           range || 33 * rangeIndex
                         }%, `
                     )
-                    .join('')}${COLORS[2]} 100%)`,
-                  alignSelf: 'center',
+                    .join("")}${COLORS[2]} 100%)`,
+                  alignSelf: "center",
                 }}
               >
                 {children}
@@ -121,14 +129,12 @@ const SliderRange: React.FC<{
                 ...props.style,
                 height: `${THUMB_SIZE}px`,
                 width: `${THUMB_SIZE}px`,
-                borderRadius: '4px',
-                backgroundColor: '#B0B0B000',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                // boxShadow: '0px 2px 6px #AAA',
-                position: 'relative',
-                borderBottom: `gray ${(THUMB_SIZE - RAIL_HEIGHT) / 2}px solid`,
+                borderRadius: "4px",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                position: "relative",
+                outline: "none",
               }}
             >
               {isDragged ? (
@@ -138,8 +144,21 @@ const SliderRange: React.FC<{
                   index={index}
                 />
               ) : null}
-              <div className='triangle-up absolute bottom-0' />
-              <div className='triangle-down absolute top-0' />
+
+              <div
+                className={`triangle${rail_height}-up-before absolute bottom-0`}
+              />
+              <div
+                className={`triangle${rail_height}-up-after absolute bottom-0`}
+              />
+              <div className={`triangle${rail_height}-up absolute bottom-0`} />
+              <div
+                className={`triangle${rail_height}-down-before absolute top-0`}
+              />
+              <div
+                className={`triangle${rail_height}-down-after absolute top-0`}
+              />
+              <div className={`triangle${rail_height}-down absolute top-0`} />
             </div>
           );
         }}
