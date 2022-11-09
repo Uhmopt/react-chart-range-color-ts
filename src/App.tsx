@@ -8,6 +8,8 @@ import {
   FaMoneyBill,
   FaSuitcase,
   FaTv,
+  FaMoon,
+  FaSun,
 } from "react-icons/fa";
 import "./assets/css/style.css";
 import { useState } from "react";
@@ -17,12 +19,42 @@ function App() {
   const [theme, setTheme] = useState(false);
 
   const DATA = [
-    { range: [33, 66], title: "Indicators", icon: <FaChartLine /> },
-    { range: [33, 66], title: "Valuation", icon: <FaMoneyBill /> },
-    { range: [33, 66], title: "Option Chain", icon: <FaLink /> },
-    { range: [33, 66], title: "Fundementals", icon: <FaChartBar /> },
-    { range: [33, 66], title: "Insider Trading", icon: <FaHandshake /> },
-    { range: [33, 66], title: "Anaylist POV", icon: <FaTv /> },
+    {
+      range: [33, 66],
+      initial_value: 43,
+      title: "Indicators",
+      icon: <FaChartLine />,
+    },
+    {
+      range: [33, 66],
+      initial_value: 27,
+      title: "Valuation",
+      icon: <FaMoneyBill />,
+    },
+    {
+      range: [33, 66],
+      initial_value: 43,
+      title: "Option Chain",
+      icon: <FaLink />,
+    },
+    {
+      range: [33, 66],
+      initial_value: 86,
+      title: "Fundementals",
+      icon: <FaChartBar />,
+    },
+    {
+      range: [33, 66],
+      initial_value: 90,
+      title: "Insider Trading",
+      icon: <FaHandshake />,
+    },
+    {
+      range: [33, 66],
+      initial_value: 90,
+      title: "Anaylist POV",
+      icon: <FaTv />,
+    },
   ];
 
   const handleClick = (itemIndex: number) => {
@@ -58,6 +90,7 @@ function App() {
                 triangle={false}
                 ranges={[33, 66]}
                 rail_height={20}
+                value={39}
               />
             </div>
             <div
@@ -85,7 +118,7 @@ function App() {
                     >
                       {item.icon}
                     </div>
-                    {item.title}
+                    <div className="gauge-icon-title">{item.title}</div>
                   </div>
                   <div className="gauge-wrapper">
                     <SliderRange
@@ -93,6 +126,7 @@ function App() {
                       ranges={item.range}
                       triangle={true}
                       rail_height={10}
+                      value={item.initial_value}
                     />
                   </div>
                 </div>
@@ -103,23 +137,21 @@ function App() {
           <div
             style={{
               width: "69%",
-              border: "3px solid #615f5f",
+              border: "1px solid #615f5f77",
               borderBottom: "0px none",
               marginTop: "10px",
               marginRight: "10px",
             }}
           >
             <button
-              style={{
-                marginTop: "100px",
-                marginLeft: "500px",
-                width: "300px",
-                height: "100px",
-                background: "aqua",
-              }}
+              style={
+                theme
+                  ? { fontSize: "30px", color: "yellow" }
+                  : { fontSize: "30px", color: "blue" }
+              }
               onClick={handleThemeChangeClick}
             >
-              Click here to alter the current Theme
+              {theme ? <FaSun /> : <FaMoon />}
             </button>
           </div>
         </div>
@@ -133,7 +165,7 @@ function App() {
           <div
             style={{
               width: "33%",
-              border: "3px solid #615f5f",
+              border: "1px solid #615f5f77",
               borderRight: "0px none",
               marginLeft: "20px",
               paddingRight: "30px",
@@ -142,7 +174,7 @@ function App() {
           <div
             style={{
               width: "69%",
-              border: "3px solid #615f5f",
+              border: "1px solid #615f5f77",
               marginRight: "10px",
               borderLeft: "0px none",
               borderTop: "0px none",
