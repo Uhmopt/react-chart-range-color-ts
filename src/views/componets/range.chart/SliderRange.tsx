@@ -1,5 +1,6 @@
 import * as React from 'react';
 import Range from './Range';
+import './range.chart.css';
 import { useThumbOverlap } from './range.chart.utils';
 
 const STEP = 0.1;
@@ -42,12 +43,17 @@ const ThumbLabel = ({
   );
 };
 
-const SliderRange: React.FC<{ rtl?: boolean; ranges?: number[] }> = ({
-  rtl = false,
-  ranges = [33, 66],
-}) => {
+const SliderRange: React.FC<{
+  rtl?: boolean;
+  ranges?: number[];
+  value?: number;
+}> = ({ rtl = false, ranges = [33, 66], value: propsValue = 50 }) => {
   const [values, setValues] = React.useState([50]);
   const rangeRef: any = React.useRef<Range>();
+
+  React.useEffect(() => {
+    setValues([propsValue]);
+  }, [propsValue]);
 
   return (
     <div
@@ -114,18 +120,20 @@ const SliderRange: React.FC<{ rtl?: boolean; ranges?: number[] }> = ({
                 height: `${THUMB_SIZE}px`,
                 width: `${THUMB_SIZE}px`,
                 borderRadius: '4px',
-                backgroundColor: '#FFF',
+                backgroundColor: '#B0B0B000',
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
-                boxShadow: '0px 2px 6px #AAA',
+                // boxShadow: '0px 2px 6px #AAA',
               }}
             >
-              <ThumbLabel
-                rangeRef={rangeRef.current}
-                values={values}
-                index={index}
-              />
+              {isDragged ? (
+                <ThumbLabel
+                  rangeRef={rangeRef.current}
+                  values={values}
+                  index={index}
+                />
+              ) : null}
               <div
                 style={{
                   height: '16px',
@@ -133,6 +141,8 @@ const SliderRange: React.FC<{ rtl?: boolean; ranges?: number[] }> = ({
                   backgroundColor: isDragged ? '#548BF4' : '#CCC',
                 }}
               />
+              <div className='triangle-up absolute' />
+              <div className='triangle-down absolute' />
             </div>
           );
         }}
