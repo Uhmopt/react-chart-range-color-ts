@@ -469,6 +469,7 @@ export const useThumbOverlap = (
       setLabelValue(labelValue);
       setLabelStyle(newStyle);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [rangeRef, values]);
 
   return [labelValue, labelStyle];
