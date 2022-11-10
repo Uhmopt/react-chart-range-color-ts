@@ -142,8 +142,7 @@ export function translateThumbs(
   rtl: boolean
 ) {
   const inverter = rtl ? -1 : 1;
-  elements.forEach((element, index) =>
-    translate(element, inverter * offsets[index].x, offsets[index].y)
+  elements.forEach((element, index) => translate(element, inverter * offsets[index].x, offsets[index].y)
   );
 }
 
@@ -232,12 +231,11 @@ export function getTrackBackground({
       `${acc}, ${colors[index]} ${point}%, ${colors[index + 1]} ${point}%`,
     ''
   );
-  return `linear-gradient(${direction}, ${colors[0]} 0%${middle}, ${
-    colors[colors.length - 1]
-  } 100%)`;
+  return `linear-gradient(${direction}, ${colors[0]} 0%${middle}, ${colors[colors.length - 1]
+    } 100%)`;
 }
 
-export function voidFn() {}
+export function voidFn() { }
 
 export function assertUnreachable(x: never): never {
   throw new Error("Didn't expect to get here");

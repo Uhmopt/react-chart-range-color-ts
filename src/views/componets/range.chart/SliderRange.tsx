@@ -20,7 +20,6 @@ const ThumbLabel = ({
   index: number;
 }) => {
   const [labelValue, style] = useThumbOverlap(rangeRef, values, index);
-
   return (
     <div
       data-label={index}
@@ -49,15 +48,13 @@ const SliderRange: React.FC<{
   ranges?: number[];
   value?: number;
   rail_height?: number;
-  triangle?: boolean;
 }> = ({
   rtl = false,
   ranges = [33, 66],
-  value: propsValue = 50,
+  value: propsValue = 0,
   rail_height = 0,
-  triangle = false,
 }) => {
-  const [values, setValues] = React.useState([50]);
+  const [values, setValues] = React.useState([0]);
   const rangeRef: any = React.useRef<Range>();
 
   React.useEffect(() => {
@@ -128,7 +125,7 @@ const SliderRange: React.FC<{
               style={{
                 ...props.style,
                 height: `${THUMB_SIZE}px`,
-                width: `${THUMB_SIZE}px`,
+                width: "100%",
                 borderRadius: "4px",
                 display: "flex",
                 justifyContent: "center",
@@ -144,21 +141,24 @@ const SliderRange: React.FC<{
                   index={index}
                 />
               ) : null}
-
-              <div
-                className={`triangle${rail_height}-up-before absolute bottom-0`}
-              />
-              <div
-                className={`triangle${rail_height}-up-after absolute bottom-0`}
-              />
-              <div className={`triangle${rail_height}-up absolute bottom-0`} />
-              <div
-                className={`triangle${rail_height}-down-before absolute top-0`}
-              />
-              <div
-                className={`triangle${rail_height}-down-after absolute top-0`}
-              />
-              <div className={`triangle${rail_height}-down absolute top-0`} />
+              <div className="needle">
+                <div
+                  className={`triangle${rail_height}-up-before absolute bottom-0`}
+                />
+                <div
+                  className={`triangle${rail_height}-up-after absolute bottom-0`}
+                />
+                <div
+                  className={`triangle${rail_height}-up absolute bottom-0`}
+                />
+                <div
+                  className={`triangle${rail_height}-down-before absolute top-0`}
+                />
+                <div
+                  className={`triangle${rail_height}-down-after absolute top-0`}
+                />
+                <div className={`triangle${rail_height}-down absolute top-0`} />
+              </div>
             </div>
           );
         }}

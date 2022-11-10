@@ -32,7 +32,7 @@
 }
 .section {
   display: flex;
-  justify-content: center;
+  /* justify-content: center; */
   align-items: center;
   width: 100%;
   padding: 5px;
@@ -88,9 +88,9 @@
   font-size: medium;
 }
 .gauge-title {
-  width: 30%;
+  width: 28%;
   display: flex;
-  margin-right: 20px;
+  margin-right: 15px;
   padding-left: 5px;
   min-width: 140px;
 }
@@ -99,12 +99,23 @@
   margin-top: 2px;
 }
 .gauge-wrapper {
-  width: 70%;
-  display: flex;
-  justify-content: center;
+  width: 67%;
+  display: block;
   align-items: center;
+  animation-name: slow;
+  animation-duration: 1.5s;
+  max-width: 360px;
   z-index: 1;
 }
+@keyframes slow {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: 67%;
+  }
+}
+
 .avg-slider {
   width: 100%;
   display: flex;
@@ -143,3 +154,19 @@
   color: #1bc7bf;
   margin-left: 10px;
 }
+.needle {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation-name: sh;
+  animation-duration: 5s;
+  animation-delay: 1.5s;
+  position: absolute;
+  visibility: visible;
+}
+/* @keyframes sh {
+  from {left: 0px;}
+  to {left: 200px;}
+} */

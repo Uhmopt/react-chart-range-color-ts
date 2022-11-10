@@ -1,5 +1,5 @@
-import * as React from 'react';
-import { Direction, IProps } from './range.chart.types';
+import * as React from "react";
+import { Direction, IProps } from "./range.chart.types";
 import {
   assertUnreachable,
   checkBoundaries,
@@ -16,10 +16,10 @@ import {
   schd,
   translateThumbs,
   voidFn,
-} from './range.chart.utils';
+} from "./range.chart.utils";
 
-const INCREASE_KEYS = ['ArrowRight', 'ArrowUp', 'k', 'PageUp'];
-const DECREASE_KEYS = ['ArrowLeft', 'ArrowDown', 'j', 'PageDown'];
+const INCREASE_KEYS = ["ArrowRight", "ArrowUp", "k", "PageUp"];
+const DECREASE_KEYS = ["ArrowLeft", "ArrowDown", "j", "PageDown"];
 
 class Range extends React.Component<IProps> {
   static defaultProps = {
@@ -66,14 +66,14 @@ class Range extends React.Component<IProps> {
     this.resizeObserver = (window as any).ResizeObserver
       ? new (window as any).ResizeObserver(this.onResize)
       : {
-          observe: () => window.addEventListener('resize', this.onResize),
-          unobserve: () => window.removeEventListener('resize', this.onResize),
+          observe: () => window.addEventListener("resize", this.onResize),
+          unobserve: () => window.removeEventListener("resize", this.onResize),
         };
 
-    document.addEventListener('touchstart', this.onMouseOrTouchStart as any, {
+    document.addEventListener("touchstart", this.onMouseOrTouchStart as any, {
       passive: false,
     });
-    document.addEventListener('mousedown', this.onMouseOrTouchStart as any, {
+    document.addEventListener("mousedown", this.onMouseOrTouchStart as any, {
       passive: false,
     });
     !this.props.allowOverlap && checkInitialOverlap(this.props.values);
@@ -87,7 +87,7 @@ class Range extends React.Component<IProps> {
     values.forEach((value) => {
       if (!isStepDivisible(min, value, step)) {
         console.warn(
-          'The `values` property is in conflict with the current `step`, `min`, and `max` properties. Please provide values that are accessible using the min, max, and step values.'
+          "The `values` property is in conflict with the current `step`, `min`, and `max` properties. Please provide values that are accessible using the min, max, and step values."
         );
       }
     });
@@ -116,7 +116,7 @@ class Range extends React.Component<IProps> {
       values.forEach((value) => {
         if (!isStepDivisible(min, value, step)) {
           console.warn(
-            'The `values` property is in conflict with the current `step`, `min`, and `max` properties. Please provide values that are accessible using the min, max, and step values.'
+            "The `values` property is in conflict with the current `step`, `min`, and `max` properties. Please provide values that are accessible using the min, max, and step values."
           );
         }
       });
@@ -128,16 +128,16 @@ class Range extends React.Component<IProps> {
       passive: false,
     };
     document.removeEventListener(
-      'mousedown',
+      "mousedown",
       this.onMouseOrTouchStart as any,
       options
     );
     // These need to be removed!!
-    document.removeEventListener('mousemove', this.schdOnMouseMove as any);
-    document.removeEventListener('touchmove', this.schdOnTouchMove as any);
-    document.removeEventListener('touchstart', this.onMouseOrTouchStart as any);
-    document.removeEventListener('mouseup', this.schdOnEnd as any);
-    document.removeEventListener('touchend', this.schdOnEnd as any);
+    document.removeEventListener("mousemove", this.schdOnMouseMove as any);
+    document.removeEventListener("touchmove", this.schdOnTouchMove as any);
+    document.removeEventListener("touchstart", this.onMouseOrTouchStart as any);
+    document.removeEventListener("mouseup", this.schdOnEnd as any);
+    document.removeEventListener("touchend", this.schdOnEnd as any);
     this.resizeObserver.unobserve(this.trackRef.current!);
   }
 
@@ -200,11 +200,11 @@ class Range extends React.Component<IProps> {
   getThumbs = () => {
     if (this.trackRef && this.trackRef.current) {
       return Array.from(this.trackRef.current.children).filter((el: any) =>
-        el.hasAttribute('aria-valuenow')
+        el.hasAttribute("aria-valuenow")
       );
     }
     console.warn(
-      'No thumbs found in the track container. Did you forget to pass & spread the `props` param in renderTrack?'
+      "No thumbs found in the track container. Did you forget to pass & spread the `props` param in renderTrack?"
     );
     return [];
   };
@@ -215,20 +215,20 @@ class Range extends React.Component<IProps> {
     );
 
   addTouchEvents = (e: TouchEvent) => {
-    document.addEventListener('touchmove', this.schdOnTouchMove, {
+    document.addEventListener("touchmove", this.schdOnTouchMove, {
       passive: false,
     });
-    document.addEventListener('touchend', this.schdOnEnd, {
+    document.addEventListener("touchend", this.schdOnEnd, {
       passive: false,
     });
-    document.addEventListener('touchcancel', this.schdOnEnd, {
+    document.addEventListener("touchcancel", this.schdOnEnd, {
       passive: false,
     });
   };
 
   addMouseEvents = (e: MouseEvent) => {
-    document.addEventListener('mousemove', this.schdOnMouseMove);
-    document.addEventListener('mouseup', this.schdOnEnd);
+    document.addEventListener("mousemove", this.schdOnMouseMove);
+    document.addEventListener("mouseup", this.schdOnEnd);
   };
 
   onMouseDownTrack = (e: React.MouseEvent) => {
@@ -363,7 +363,7 @@ class Range extends React.Component<IProps> {
           values,
           index,
           this.normalizeValue(
-            values[index] + inverter * (e.key === 'PageUp' ? step * 10 : step),
+            values[index] + inverter * (e.key === "PageUp" ? step * 10 : step),
             index
           )
         )
@@ -380,12 +380,12 @@ class Range extends React.Component<IProps> {
           index,
           this.normalizeValue(
             values[index] -
-              inverter * (e.key === 'PageDown' ? step * 10 : step),
+              inverter * (e.key === "PageDown" ? step * 10 : step),
             index
           )
         )
       );
-    } else if (e.key === 'Tab') {
+    } else if (e.key === "Tab") {
       this.setState({ draggedThumbIndex: -1 }, () => {
         // If key pressed when thumb was moving, fire onFinalChange
         if (isChanged) {
@@ -526,11 +526,11 @@ class Range extends React.Component<IProps> {
 
   onEnd = (e: Event) => {
     e.preventDefault();
-    document.removeEventListener('mousemove', this.schdOnMouseMove);
-    document.removeEventListener('touchmove', this.schdOnTouchMove);
-    document.removeEventListener('mouseup', this.schdOnEnd);
-    document.removeEventListener('touchend', this.schdOnEnd);
-    document.removeEventListener('touchcancel', this.schdOnEnd);
+    document.removeEventListener("mousemove", this.schdOnMouseMove);
+    document.removeEventListener("touchmove", this.schdOnTouchMove);
+    document.removeEventListener("mouseup", this.schdOnEnd);
+    document.removeEventListener("touchend", this.schdOnEnd);
+    document.removeEventListener("touchcancel", this.schdOnEnd);
     if (
       this.state.draggedThumbIndex === -1 &&
       this.state.draggedTrackPos[0] === -1 &&
@@ -630,17 +630,17 @@ class Range extends React.Component<IProps> {
         style: {
           // creates stacking context that prevents z-index applied to thumbs
           // interfere with other elements
-          transform: 'scale(1)',
+          transform: "scale(1)",
           cursor:
             draggedThumbIndex > -1
-              ? 'grabbing'
+              ? "grabbing"
               : this.props.draggableTrack
               ? isVertical(this.props.direction)
-                ? 'ns-resize'
-                : 'ew-resize'
+                ? "ns-resize"
+                : "ew-resize"
               : values.length === 1 && !disabled
-              ? 'pointer'
-              : 'inherit',
+              ? "pointer"
+              : "inherit",
         },
         onMouseDown: disabled ? voidFn : this.onMouseDownTrack,
         onTouchStart: disabled ? voidFn : this.onTouchStartTrack,
@@ -656,12 +656,12 @@ class Range extends React.Component<IProps> {
                 this.props.direction === Direction.Left ||
                 this.props.direction === Direction.Right
                   ? {
-                      position: 'absolute',
+                      position: "absolute",
                       left: `${offset[0]}px`,
                       marginTop: `${offset[1]}px`,
                     }
                   : {
-                      position: 'absolute',
+                      position: "absolute",
                       top: `${offset[0]}px`,
                       marginLeft: `${offset[1]}px`,
                     },
@@ -679,23 +679,23 @@ class Range extends React.Component<IProps> {
             isDragged,
             props: {
               style: {
-                position: 'absolute',
+                position: "absolute",
                 zIndex: thumbZIndexes[index],
-                cursor: disabled ? 'inherit' : isDragged ? 'grabbing' : 'grab',
-                userSelect: 'none',
-                touchAction: 'none',
-                WebkitUserSelect: 'none',
-                MozUserSelect: 'none',
-                msUserSelect: 'none',
+                cursor: disabled ? "inherit" : isDragged ? "grabbing" : "grab",
+                userSelect: "none",
+                touchAction: "none",
+                WebkitUserSelect: "none",
+                MozUserSelect: "none",
+                msUserSelect: "none",
               } as React.CSSProperties,
               key: index,
               tabIndex: disabled ? undefined : 0,
-              'aria-valuemax': allowOverlap ? max : values[index + 1] || max,
-              'aria-valuemin': allowOverlap ? min : values[index - 1] || min,
-              'aria-valuenow': value,
+              "aria-valuemax": allowOverlap ? max : values[index + 1] || max,
+              "aria-valuemin": allowOverlap ? min : values[index - 1] || min,
+              "aria-valuenow": value,
               draggable: false,
               ref: this.thumbRefs[index],
-              role: 'slider',
+              role: "slider",
               onKeyDown: disabled ? voidFn : this.onKeyDown,
               onKeyUp: disabled ? voidFn : this.onKeyUp,
             },

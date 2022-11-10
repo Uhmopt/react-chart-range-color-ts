@@ -1,22 +1,19 @@
 import "./App.css";
-import SliderRange from "./views/componets/range.chart/SliderRange";
+import SliderRangeCountUp from "./views/componets/range.chart/SliderRangeCountUp";
+import { useState } from "react";
 import {
   FaChartBar,
   FaChartLine,
   FaHandshake,
   FaLink,
-  FaMoneyBill,
-  FaSuitcase,
-  FaTv,
-  FaMoon,
-  FaSun,
+  FaMoneyBill, FaMoon, FaSuitcase, FaSun, FaTv
 } from "react-icons/fa";
 import "./assets/css/style.css";
-import { useState } from "react";
+import "./assets/css/styletest.css";
 
 function App() {
   const [seleted, setSelected] = useState(-1);
-  const [theme, setTheme] = useState(false);
+  const [theme, setTheme] = useState(true);
 
   const DATA = [
     {
@@ -39,7 +36,7 @@ function App() {
     },
     {
       range: [33, 66],
-      initial_value: 86,
+      initial_value: 83,
       title: "Fundementals",
       icon: <FaChartBar />,
     },
@@ -52,7 +49,7 @@ function App() {
     {
       range: [33, 66],
       initial_value: 90,
-      title: "Analyst POV",
+      title: "Anaylist POV",
       icon: <FaTv />,
     },
   ];
@@ -65,7 +62,6 @@ function App() {
     if (theme) setTheme(false);
     else setTheme(true);
   };
-
   return (
     <>
       <div style={{ width: "100%" }}>
@@ -85,9 +81,7 @@ function App() {
               <span className="status red-status">Sell</span>
             </div>
             <div className="avg-slider">
-              <SliderRange
-                key={"slider"}
-                triangle={false}
+              <SliderRangeCountUp
                 ranges={[33, 66]}
                 rail_height={20}
                 value={39}
@@ -121,14 +115,14 @@ function App() {
                     <div className="gauge-icon-title">{item.title}</div>
                   </div>
                   <div className="gauge-wrapper">
-                    <SliderRange
+                    <SliderRangeCountUp
                       key={itemIndex}
                       ranges={item.range}
-                      triangle={true}
                       rail_height={10}
                       value={item.initial_value}
                     />
                   </div>
+                  <div className="gauge-wrapper-assist"></div>
                 </div>
               ))}
             </div>
